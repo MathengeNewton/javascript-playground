@@ -1,3 +1,3 @@
-# Advanced-JS-Concepts
+# JS-Playground
 
-My notes and examples illustrating advanced topics in JavaScript.
+My notes and code examples illustrating tricky or advanced topics in JavaScript.
