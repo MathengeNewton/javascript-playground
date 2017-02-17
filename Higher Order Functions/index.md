@@ -16,3 +16,15 @@ Here we replace the traditional if/else with a function that takes two callback 
 
   ifElse(true,trueFunc,falseFunc); // console.log(true)
 ```
+
+## Passing Arguments
+
+In order to pass a callback an argument, that argument must be passed in as a separate parameter:
+
+```javascript
+function doMath(n, mathFunc) {
+  return mathFunc(n);
+}
+
+function square(x) { return x * x; };
+```
