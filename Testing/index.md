@@ -7,6 +7,8 @@ Testing involves different levels of abstraction which can be classified into:
 1. Assertion libraries
 1. Testing Plugins
 
+**Code Coverage** is a way of measuring which lines of code have been touched by a test suite. This can be accomplished by a Karma plugin. 
+
 ## Karma
 
 Karma is a test runner that creates a fake server and launches tests in various browsers. Within `karma.config.js` we configure which testing software will plug into Karma (Mocha, Chai, etc.).
