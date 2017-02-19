@@ -7,10 +7,60 @@ The arguments passed into a function can be accessed using the `arguments` array
 A function that is assigned to variable is called a function expression.
 
 ```javascript
-var foo = function(){}
+var foo = function(){} // anonymous function expression
 
 var foo = function bar() {} // bar() will only exist within function scope
 ```
+
+Note of caution: Anonymous function expressions a) do not give you a way to refer to the function from inside of itself (i.e. for unbinding an event handler or for recursion) and b) are completely useless when trying to debug using the stack track.
+
+### IIFE
+
+The Immediately Invoked Function Expression pattern is a technique used to encapsulate inner variables without polluting outer scope.
+
+```javascript
+var foo = "bar";
+
+(function() { // this is now a function expression
+  var foo = "baz";
+  console.log(foo); // "baz"
+})();
+
+console.log(foo); // "bar"
+```
+
+Here we wrap an anonymous function in parentheses, changing it from a declaration to an expression. Then we call it with `()`. It is recommended that you name your IIFEs, for example:
+
+```javascript
+(function iife() {
+
+})();
+```
+
+If you are following the IIFE pattern and need to make one or more of your functions public, simply attach them to the global window object. You can pass in the window object via invocation time with:
+
+```javascript
+(function iife(window) {
+  window.globalFunc = function() {
+    console.log("I'm available outside the IIFE");
+  }
+
+  hiddenFunc = function() {
+    console.log("I'm only available inside the IIFE");
+  }
+})(window);
+```
+
+Contrast this with creating a named function declaration and then calling that function by name:
+
+```javascript
+function qux() {
+
+}
+qux();
+```
+
+In this case, the function name has leaked (unnecessarily) into global scope.
 
 ## Function Declaration
 
