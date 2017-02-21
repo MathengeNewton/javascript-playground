@@ -97,6 +97,76 @@ function foo() {
 
 Unlike `var`, the `let` keyword does not hoist so you must be sure to declare it at the top of the scope in which you're using it.
 
+## this Keyword
+
+Every function, while executing, has a reference to its current execution context, called `this`. How `this` is defined is determined by where the function is called. The following four rules apply, in **increasing order of precedence**:
+
+1. If we had just a normal function call `foo()` or an IIFE, the default binding rule applies: if in strict mode, default the `this` keyword to the `undefined` value; else, default the `this` keyword to the global object.
+1. When there is an object property reference at the call-site, `obj.foo()`, the implicit binding rule applies: the object at the call-site (aka the base/owning object) becomes the `this` binding.
+1. If we use `call` or `apply` at the call-site, the explicit binding rule applies: the argument of the function call is explicitly set to be the `this` binding. See below for an example of hard binding, which is the basis for the `bind` method.
+1. If we use the `new` keyword, hijacking a function call and turning it into a constructor call: the `this` binding is set to the newly created empty object.
+
+```javascript
+function foo() {
+  console.log(this.bar);
+}
+
+var bar = "rule1";
+var obj = { bar: "rule2", foo: foo };
+var obj = { bar: "rule" };
+
+foo(); // "rule1"
+obj.foo(); // "rule2"
+foo.call(obj); // "rule3"
+```
+
+## Hard Binding with bind()
+
+One way to eliminate the uncertainty of the `this` binding is to hard bind it to the correct object. Then, no matter how the function is called at a later time, it will continue to reference the same `this`:
+
+```javascript
+function foo() {
+  console.log(this.bar);
+}
+
+var bar = "global";
+var obj = { bar: "obj-bar" };
+var obj2 = { bar: "obj2-bar" };
+
+var orig = foo; // preserve the original function
+foo = function() { orig.call(obj) }; // overwrite foo, hard binding the this keyword permanently to obj
+
+foo(); // "obj-bar" NOT "global"
+foo.call(obj2); // "obj-bar" NOT "obj2-bar"
+```
+
+This forms the basis of the `Function.prototype.bind` method, which simplifies the syntax:
+
+```javascript
+this.x = 9;
+var module = {
+  x: 30,
+  getX: function() { return this.x; }
+};
+
+module.getX(); // 30 (Rule 2)
+
+var defaultsToGlobal = module.getX;
+defaultsToGlobal(); // 9 (Rule 1)
+
+var retrieveModuleX = defaultsToGlobal.bind(module);
+retrieveModuleX(); // 30 (Rule 3)
+```
+
+## new keyword
+
+The`new` keyword turns a function call into a constructor call, with four ramifications:
+
+1. A new empty object is created.
+1. The new object is linked to another object.
+1. The new object gets bound as the `this` keyword for that function call.
+1. If that function does not otherwise return anything, it will implicitly insert a `return this`, returning the new object.
+
 **References**
 
   *[You Don't Know JS: Scope & Closures: Chapter 2: Lexical Scope](/https://github.com/getify/You-Dont-Know-JS/blob/master/scope%20%26%20closures/ch2.md)
