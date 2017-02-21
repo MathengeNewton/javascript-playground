@@ -2,6 +2,15 @@
 
 The arguments passed into a function can be accessed using the `arguments` array-like object (it has a `length` method but no other array methods). Functions can be called with any number of arguments, regardless of the number of parameters listed in the function declaration.
 
+A common task is converting the `arguments` object into a proper array, which can then be passed into other functions. In ES6, this is trivially accomplished with `Array.from`; in ES5, we would access the `Array.prototype.slice` method and `apply` it to the `arguments` object:
+
+```javascript
+function foo() {
+  var argsArrayES6 = Array.from(arguments);
+  var argsArrayES5 = Array.prototype.slice.apply(arguments); 
+}
+```
+
 ## Function Expression
 
 A function that is assigned to variable is called a function expression.
