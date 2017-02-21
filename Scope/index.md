@@ -11,7 +11,43 @@ function baz(foo) {
 }
 ```
 
-Two often confused terms are **undeclared** and **undefined**. **Undeclared** means that for a specific identifier, there is no declaration within any of the scopes that we have access to. If the variable was declared but not initialized to anything we call it **undefined**. This does not mean that the variable is empty; **undefined** is the value that fills the otherwise empty vacuum.
+**Hoisting** is a useful mental model to understand how declarations are parsed by the JavaScript engine. It refers to how both variable declarations and functions are moved to the top of their scope block during the compiling phase.
+
+A key feature of **hoisting** is that function declarations are hoisted in their entirety, while function expressions are not.
+
+```javascript
+var a = b(); // "Declaration is hoisted"
+var c = d(); // Undefined
+
+function b() {
+  console.log("Entire declaration is hoisted");
+}
+
+var d = function() {
+  console.log("Only the function expression variable is hoisted");
+};
+
+```
+
+At the point when we try to call `d()`, it does not yet have a value and thus cannot be executed.
+
+Function declarations of the same name will overwrite one another when hoisted to the top of scope. The one declared later in the code will prevail. Also note that function declarations are hoisted above variable declarations.
+
+```javascript
+foo(); // "foo"
+
+var foo = "qux";
+
+function foo() {
+  console.log("bar");
+}
+
+function foo() {
+  console.log("foo");
+}
+```
+
+Two often confused terms are **undeclared** and **undefined**. **Undeclared** means that for a specific identifier, there is no declaration within any of the scopes that we have access to. If the variable was declared but not initialized to anything we say it is **undefined**. This does not mean that the variable is empty; **undefined** is the value that fills the otherwise empty vacuum of an uninitialized variable.
 
 ## Lexical Scope
 
@@ -59,7 +95,7 @@ function foo() {
 }
 ```
 
-Unlike `var`, the `let` keyword does not hoist.
+Unlike `var`, the `let` keyword does not hoist so you must be sure to declare it at the top of the scope in which you're using it.
 
 **References**
 
