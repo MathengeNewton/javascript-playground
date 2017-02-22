@@ -1,8 +1,8 @@
 # Closures
 
-The key with closures is that we create an inner function that is returned by an outer function so that we can call it at a later time. All of the variables in the outer scope are preserved and accessible from the time of invocation from within this inner function.
+Closure is when a function "remembers" its lexical scope even when the function is executed outside that lexical scope. This is accomplished by encapsulating variables inside of an inner function that we can call it at a later time or pass into other function.. All of the variables in the outer scope are preserved and accessible from the time of invocation from within this inner function.
 
-We can also return an object and retain access to the object's methods after the fact.
+Closure is a necessary mechanism in a number of common methods and tasks, including `setTimeout` and adding event handlers. Both of these examples require that functions be executed at a later time yet still retain their lexical scope.
 
 ## How to Create a Closure
 
@@ -19,7 +19,7 @@ function checkScope() {
     return innerVar;
   }
 
-  return innerVar;
+  return innerFunc;
 }
 
 var testScope = checkScope();

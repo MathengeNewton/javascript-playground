@@ -2,7 +2,7 @@
 
 ## Object Inheritance
 
-Inheritance is implemented in JavaScript using a prototype chain; if a child scope does not contain an invoked method or property, the engine will look up to the scope of the parent, and so on. We can use `Object.create(prototype)` to create new a object and assigns it a prototype. This method was written by Douglas Crockford as a way of creating objects that is more in line with how prototypes work that the `new` keyword.
+Inheritance is implemented in JavaScript using a prototype chain; if a "child" scope does not contain an invoked method or property, the engine will look up to the scope of linked "parent" object, and so on. We can use `Object.create(prototype)` to create new a object and assigns it a prototype. This method was written by Douglas Crockford as a way of creating objects that is more in line with how prototypes work that the `new` keyword.
 
 ```javascript
 function cat() {
@@ -36,9 +36,11 @@ function newRebuilt(_constructor) {
 
 ## proto vs. prototype
 
+In JavaScript, two objects can be linked to each other via an internal `prototype` chain. This chain is the basis for property and method lookups; if something is not found in scope, the `get` lookup will traverse the chain and try to resolve the property/method on the linked object. If still not found, it will keep going up the `prototype` chain until it satisfies the lookup or has no more objects to traverse.
+
 `__proto__` references the prototype of an object. Modifying the parent prototype will result in changes to children down the chain. This is in contrast to proper class based languages, which instantiate entirely new objects that are separate from their parents.
 
-`prototype` exists only on functions for the sole purpose of using the function as a constructor passed to the `new` keyword. All functions are automatically given a `prototype` property on declaration (unlike object literals, for example):
+`prototype` is an internal object that exists only on functions for the sole purpose of using the function as a constructor passed to the `new` keyword. It is the object from which other objects inherit their properties. All functions are automatically given a `prototype` property on declaration (unlike object literals, for example):
 
 ```javascript
 function robot() {};
