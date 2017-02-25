@@ -2,7 +2,9 @@
 
 ## Object Inheritance
 
-Inheritance is implemented in JavaScript using a prototype chain; if a "child" scope does not contain an invoked method or property, the engine will look up to the scope of linked "parent" object, and so on. We can use `Object.create(prototype)` to create new a object and assigns it a prototype. This method was written by Douglas Crockford as a way of creating objects that is more in line with how prototypes work that the `new` keyword.
+Inheritance is implemented in JavaScript using a prototype chain; if a "child" scope does not contain an invoked method or property, the engine will look up to the scope of linked "parent" object, and so on. It may be more accurate to say that JavaScript has "behavior delegation" instead of "inheritance".
+
+We can use `Object.create(prototype)` to create new a object and assigns it a prototype. This method was written by Douglas Crockford as a way of creating objects that is more in line with how prototypes work that the `new` keyword.
 
 ```javascript
 function cat() {
