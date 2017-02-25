@@ -8,6 +8,7 @@ My notes and code examples illustrating tricky or advanced topics in JavaScript.
 * [Higher Order Functions](/Higher Order Functions/index.md)
 * [Module Pattern](/Module Pattern/index.md)
 * [npm](/npm/index.md)
+* [OOP](/OOP/index.md)
 * [Scope](/Scope/index.md)
 * [Testing](/Testing/index.md)
 * [Webpack](Webpack/index.md)
