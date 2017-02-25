@@ -34,11 +34,13 @@ function newRebuilt(_constructor) {
 }
 ```
 
-## proto vs. prototype
+## `[[Prototype]]` vs. `__proto__` vs. `prototype`
 
-In JavaScript, two objects can be linked to each other via an internal `prototype` chain. This chain is the basis for property and method lookups; if something is not found in scope, the `get` lookup will traverse the chain and try to resolve the property/method on the linked object. If still not found, it will keep going up the `prototype` chain until it satisfies the lookup or has no more objects to traverse.
+In JavaScript, two objects can be linked to each other via an internal `[[Prototype]]` chain. This chain is the basis for property and method lookups; if something is not found in scope, the `get` lookup will traverse the chain and try to resolve the property/method on the linked object. If still not found, it will keep going up the prototype chain until it satisfies the lookup or has no more objects to traverse.
 
-`__proto__` references the prototype of an object. Modifying the parent prototype will result in changes to children down the chain. This is in contrast to proper class based languages, which instantiate entirely new objects that are separate from their parents.
+`[[Prototype]]` ("Bracket Bracket P") is the internal linkage between objects. Created either through `Object.create` or through the use of the `new` keyword.
+
+`__proto__` ("dunder-proto") is a public property that references the internal `[[Prototype]]` of an object. Prototype linkages allows us to delegate method calls or property references to other objects without duplication of code. Methods and properties of one object can shadow other objects - i.e. share the same name. Note: `Object.getPrototypeOf(obj) === obj.__proto__`.
 
 `prototype` is an internal object that exists only on functions for the sole purpose of using the function as a constructor passed to the `new` keyword. It is the object from which other objects inherit their properties. All functions are automatically given a `prototype` property on declaration (unlike object literals, for example):
 

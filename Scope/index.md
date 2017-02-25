@@ -163,7 +163,7 @@ retrieveModuleX(); // 30 (Rule 3)
 The`new` keyword turns a function call into a constructor call, with four ramifications:
 
 1. A new empty object is created.
-1. The new object is linked to another object.
+1. The new object is linked to another object, by `[[Prototype]]` linkage.
 1. The new object gets bound as the `this` keyword for that function call.
 1. If that function does not otherwise return anything, it will implicitly insert a `return this`, returning the new object.
 
