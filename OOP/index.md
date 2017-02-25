@@ -1,4 +1,4 @@
-# OOOP
+# OOP
 
 ## Object Inheritance
 
@@ -7,20 +7,41 @@ Inheritance is implemented in JavaScript using a prototype chain; if a "child" s
 We can use `Object.create(prototype)` to create new a object and assigns it a prototype. This method was written by Douglas Crockford as a way of creating objects that is more in line with how prototypes work that the `new` keyword.
 
 ```javascript
-function cat() {
+function Cat() {
   makeSound: function() {
     console.log(this.sound);
   }
 }
 
-var fred = Object.create(cat);
+var fred = Object.create(Cat);
 fred.sound = "Moo";
 fred.makeSound();
 
 cat.isPrototypeOf(fred); // true
 ```
 
-The `Object.create` method uses `Object.setPrototypeOf(child, parent)` behind the scenes; never use this method directly as it is a performance hog.
+Methods and properties are added to the `prototype` object:
+
+```javascript
+function Foo(who) {
+  this.me = who;
+}
+Foo.prototype.identify = function() {
+  return "I am " + this.me;
+};
+
+function Bar(who) {
+  Foo.call(this, who);
+}
+Bar.prototype = Object.create(Foo.prototype);
+
+Bar.prototype.speak = function() {
+  alert("Hello, " + this.identify() + ".");
+};
+
+var b1 = new Bar("b1");
+b1.speak();
+```
 
 ## The new Keyword
 
@@ -55,4 +76,41 @@ dolphin.prototype; // Undefined
 
 robot.__proto__; // function () {}
 dolphin.__proto__; // Object {}
+```
+
+## OLOO: Objects Linked to Other Objects
+
+A different pattern of thinking that emphasizes the linkages between objects and delegation of methods without using a formal constructor function:
+
+```javascript
+var Foo = {
+  init: function(who) {
+    this.me = who;
+  },
+  identify: function() {
+    return "I am " + this.me;
+  }
+};
+
+var Bar = Object.create(Foo);
+
+Bar.speak = function() {
+  alert("Hello, " + this.identify() + ".");
+};
+
+var b1 = Object.create(Bar);
+b1.init("b1");
+b1.speak();
+```
+
+This is a style promoted by Kyle Simpson. Notice that it does not involve the `new` keyword or any manual additions to the `prototype` object. Instead, `Object.create` handles all that for us. Here's a polyfill for `Object.create` showing what it does behind the scenes.
+
+```javascript
+  if (!Object.create) {
+    Object.create = function(o) {
+      function F() {}
+      F.prototype = o;
+      return new F();
+    };
+  }
 ```
