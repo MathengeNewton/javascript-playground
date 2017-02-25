@@ -8,4 +8,4 @@ setTimeout(function() {
 }, 1000);
 ```
 
-*Callback hell* aka *The Pyramid of Doom* is when callbacks are nested many levels deep.
+*Callback hell* aka *The Pyramid of Doom* is when callbacks are nested many levels deep. The real issue is that we are handing control over to some other utility and trusting that everything will come back OK.

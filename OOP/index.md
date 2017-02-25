@@ -43,7 +43,7 @@ var b1 = new Bar("b1");
 b1.speak();
 ```
 
-## The new Keyword
+## The `new` Keyword
 
 There are 4 key details with how the `new` keyword works. Let's rebuild our own version to understand what is going on under the hood:
 
