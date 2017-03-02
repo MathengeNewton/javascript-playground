@@ -11,6 +11,8 @@ My notes and code examples illustrating tricky or advanced topics in JavaScript.
 * [Module Pattern](/Module Pattern/index.md)
 * [npm](/npm/index.md)
 * [OOP](/OOP/index.md)
+* [Promises](/Promises/index.md)
 * [Scope](/Scope/index.md)
+* [Sorting Algorithms](/Sorting Algorithms/index.md)
 * [Testing](/Testing/index.md)
 * [Webpack](Webpack/index.md)
