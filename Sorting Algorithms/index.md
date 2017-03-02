@@ -22,3 +22,17 @@ function bubbleSort(arr){
   return arr;
 }
 ```
+
+
+## Insertion Sort
+
+Slightly better than Bubble Sort, but still `O(n^2)`. Has a much more favorable outcome if the list is already partially sorted. The algorithm breaks the main array into a progressively more sorted sub-array.
+
+## Merge Sort
+
+Merge Sort is an effective recursive sorting algorithm that underlies the native JavaScript `sort` method. It breaks an array into two parts, then those two parts into four etc. all the way down until arrays of one element. Then it stitches them back together to form a fully sorted array.
+
+
+**References**
+
+* [www.bigocheatsheet.com](http://www.bigocheatsheet.com/)
